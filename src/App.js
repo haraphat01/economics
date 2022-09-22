@@ -1,6 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import './App.css';
+import Main from './Main';
+import Sidebar from './Sidebar';
+import "./Sidebar";
 
 
 
