@@ -1,3 +1,3 @@
 import { createStore } from "redux";
-const store = createStore(someReducer, initialState);
+const store = createStore(reducer, {contacts});
 export default store;
