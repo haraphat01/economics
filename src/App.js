@@ -7,31 +7,37 @@ import './App.css';
 
 
 function App() {
-  let [name, setName] = useState({
-    firstName: " ",
-    lastName: " "
-  })
 
-  function on(e){
-    e.preventDefault()
-    setName(
-      {
-        ...name,
-        firstName: e.target.value,
-        lastName: e.target.value.lastName
-      }
-    )
+  const [number, setNumber] = useState(0)
+  let init = 0;
+  function inc() {
+       setNumber(prev => prev + 1 )
   }
-  
+
+  function dec() {
+    if (number === 0) {
+      return 0
+    }
+    setNumber(prev => prev - 1 )
+}
+
+function ze() {
+  setNumber(init)
+}
+
+useEffect(
+  () =>{
+    document.title = `fuck you ${number}`
+  }
+)
   return (
     <div className="App">
-      <form>
-        <input type="text" value={name.firstName} onChange={on}/>
-        <input type="text" value={name.lastName} onChange={on}/>
-      </form>
+     
     
-        <p>{name.firstName}</p>
-        <p>{name.lastName}</p>
+      <p>{number}</p>
+       <button onClick={inc}> increase</button>
+       <button onClick={dec}> Decrease</button>
+       <button onClick={ze}> Zero</button>
        </div>
   );
 }
