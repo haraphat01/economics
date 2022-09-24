@@ -5,14 +5,24 @@ import Main from './Main';
 
 
 let initialState = {
-  first_counter: 0
+  loading: true,
+  error: " ",
+  post: {}
 }
 let reducer = (state, action) => {
-  switch(action){
-    case 'increment':
-      return state + 1
-    case 'decrement':
-      return state - 1
+  switch(action.type){
+    case 'success':
+      return {...state,
+      post: action.payload,
+    error: ''}
+    case 'fail':
+      return {
+        post: {},
+        error: "something went wrong",
+        loading: false
+      }
+    case 'dec':
+      return {...state,second_counter: state.second_counter + 10000}
     case 'reset':
       return initialState
     default:
@@ -28,13 +38,6 @@ function App() {
 //        setNumber(prev => prev + 1 )
 //   }
 
-  function dec() {
-    if (dispatcher('decrement') === 0) {
-      return  dispatcher('reset')
-    }
-    dispatcher('decrement')
-}
-
 // function ze() {
 //   setNumber(init)
 // }
@@ -49,9 +52,9 @@ function App() {
      
     
       <p>{inc.first_counter}</p>
+      <p>{inc.second_counter}</p>
        <button onClick={() => dispatcher({type:'increment'})}> increase</button>
-       <button onClick={() =>dispatcher({type:'decrement'})}> Decrease</button>
-       <button onClick={() => dispatcher({type:'reset'})}> Zero</button>
+       
   
       <Main/>
    
