@@ -1,43 +1,59 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, React, useReducer } from 'react';
 import './App.css';
+import Main from './Main';
 
 
-
-
-
-function App() {
-
-  const [number, setNumber] = useState(0)
-  let init = 0;
-  function inc() {
-       setNumber(prev => prev + 1 )
+let initialState = 0;
+let reducer = (state, action) => {
+  switch(action){
+    case 'increment':
+      return state + 1
+    case 'decrement':
+      return state - 1
+    case 'reset':
+      return initialState
+    default:
+      return state
   }
+}
+function App() {
+  
+  const [inc, dispatcher] = useReducer(reducer, initialState)
+  // const [number, setNumber] = useState(0)
+  // let init = 0;
+//   function inc() {
+//        setNumber(prev => prev + 1 )
+//   }
 
   function dec() {
-    if (number === 0) {
-      return 0
+    if (dispatcher('decrement') === 0) {
+      return  dispatcher('reset')
     }
-    setNumber(prev => prev - 1 )
+    dispatcher('decrement')
 }
 
-function ze() {
-  setNumber(init)
-}
+// function ze() {
+//   setNumber(init)
+// }
 
-useEffect(
-  () =>{
-    document.title = `fuck you ${number}`
-  }
-)
+// useEffect(
+//   () =>{
+//     document.title = `fuck you ${number}`
+//   }
+// )
   return (
     <div className="App">
      
     
-      <p>{number}</p>
-       <button onClick={inc}> increase</button>
-       <button onClick={dec}> Decrease</button>
-       <button onClick={ze}> Zero</button>
+      <p>{inc}</p>
+       <button onClick={() => dispatcher('increment')}> increase</button>
+       <button onClick={() =>dec()}> Decrease</button>
+       <button onClick={() => dispatcher('reset')}> Zero</button>
+  
+      <Main/>
+   
+
        </div>
   );
 }
