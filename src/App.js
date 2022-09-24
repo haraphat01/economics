@@ -4,7 +4,9 @@ import './App.css';
 import Main from './Main';
 
 
-let initialState = 0;
+let initialState = {
+  first_counter: 0
+}
 let reducer = (state, action) => {
   switch(action){
     case 'increment':
@@ -46,10 +48,10 @@ function App() {
     <div className="App">
      
     
-      <p>{inc}</p>
-       <button onClick={() => dispatcher('increment')}> increase</button>
-       <button onClick={() =>dec()}> Decrease</button>
-       <button onClick={() => dispatcher('reset')}> Zero</button>
+      <p>{inc.first_counter}</p>
+       <button onClick={() => dispatcher({type:'increment'})}> increase</button>
+       <button onClick={() =>dispatcher({type:'decrement'})}> Decrease</button>
+       <button onClick={() => dispatcher({type:'reset'})}> Zero</button>
   
       <Main/>
    
